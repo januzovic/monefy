@@ -135,6 +135,10 @@ a {
   color: inherit;
 }
 
+.mt-30 {
+  margin-top: 30px;
+}
+
 /* ─── Reusable bits ─────────────────────────────────────── */
 
 .container {
@@ -355,9 +359,10 @@ a {
 /* ─── Buttons ───────────────────────────────────────────── */
 
 .btn {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
+  width: fit-content;
   cursor: pointer;
   text-decoration: none;
   font-family: var(--font-body);
@@ -395,8 +400,9 @@ a {
 }
 
 .btn-primary {
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  width: fit-content;
   gap: 8px;
   padding: 10px 16px;
   font-family: var(--font-body);
@@ -421,6 +427,10 @@ a {
 .btn-primary:active {
   transform: translate(1.5px, 1.5px);
   box-shadow: 1px 1px 0 0 var(--ink);
+}
+
+.btn-center {
+  margin-inline: auto;
 }
 
 /* ─── Page & Sections ───────────────────────────────────── */
@@ -960,6 +970,207 @@ a {
   border: 1.5px solid var(--ink);
   padding: 8px 14px;
   background: var(--brand);
+}
+
+/* ─── Solution section ──────────────────────────────────── */
+
+.text-center {
+  text-align: center;
+}
+
+/* No .container in the markup — constrain & center the children directly */
+.solution-section {
+  padding-inline: var(--gutter);
+}
+
+.solution-section > * {
+  max-width: var(--column);
+  margin-inline: auto;
+}
+
+.solution-section .container > .subtitle {
+  text-align: center;
+  max-width: 620px;
+  margin: 22px auto 0;
+}
+
+/* Lead panel — the single inverted, high-contrast moment on the page */
+.premium-card {
+  position: relative;
+  margin-top: 64px;
+  padding: 52px 48px 48px;
+  background: var(--ink);
+  color: var(--paper);
+  border: 1.5px solid var(--ink);
+  box-shadow: 10px 10px 0 var(--brand);
+  overflow: hidden;
+}
+
+.premium-card::before {
+  content: "The System";
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-family: var(--font-body);
+  font-size: 10.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--ink);
+  background: var(--brand);
+  padding: 8px 14px;
+  border-left: 1.5px solid var(--ink);
+  border-bottom: 1.5px solid var(--ink);
+}
+
+.title-tertiary {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 3vw, 40px);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.02;
+  color: var(--paper);
+  margin: 0 0 18px;
+  max-width: 620px;
+}
+
+.premium-card .subtitle {
+  color: rgba(241, 236, 225, 0.6);
+  max-width: 560px;
+  margin: 0 0 38px;
+  animation: none;
+}
+
+.premium-card .grid {
+  display: grid;
+}
+
+/* Capability ledger inside the dark panel */
+.grid-2-col {
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0 48px;
+  border-top: 1px solid rgba(241, 236, 225, 0.18);
+}
+
+.grid-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 17px 0;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  color: var(--paper);
+  border-bottom: 1px solid rgba(241, 236, 225, 0.18);
+}
+
+.grid-item::before {
+  content: "→";
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 15px;
+  line-height: 1;
+  color: var(--brand);
+}
+
+/* Strip the bottom rule off the last row (exactly 4 capabilities) */
+.grid-2-col .grid-item:nth-last-child(-n + 2) {
+  border-bottom: none;
+}
+
+/* Three feature columns — shares the bordered-grid + hover-reveal language
+   of the problem grid, differentiated with "Fig." datelines */
+.grid-3-col {
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  margin-top: 64px;
+  border-top: 1.5px solid var(--ink);
+  border-left: 1.5px solid var(--ink);
+  counter-reset: feat;
+}
+
+.grid-item--small {
+  counter-increment: feat;
+  position: relative;
+  overflow: hidden;
+  padding: 30px 28px 36px;
+  background: var(--paper);
+  border-right: 1.5px solid var(--ink);
+  border-bottom: 1.5px solid var(--ink);
+  transition: background-color 0.25s ease;
+}
+
+.grid-item--small::before {
+  content: "Fig. 0" counter(feat);
+  display: block;
+  font-family: var(--font-body);
+  font-size: 10.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--ink-3);
+  padding-bottom: 14px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid var(--ink);
+}
+
+.grid-item--small::after {
+  content: "";
+  position: absolute;
+  left: 28px;
+  right: 28px;
+  bottom: 16px;
+  height: 6px;
+  background: var(--brand);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.32s cubic-bezier(0.6, 0, 0.4, 1);
+}
+
+.grid-item--small:hover {
+  background: var(--paper-2);
+}
+
+.grid-item--small:hover::after {
+  transform: scaleX(1);
+}
+
+.grid-item-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+  color: var(--ink);
+  margin: 0 0 10px;
+}
+
+.grid-item-text {
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  color: var(--ink-3);
+  line-height: 1.55;
+  margin: 0;
+}
+
+@media (max-width: 860px) {
+  .premium-card {
+    padding: 44px 28px 36px;
+  }
+  .grid-2-col {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .grid-2-col .grid-item:nth-last-child(-n + 2) {
+    border-bottom: 1px solid rgba(241, 236, 225, 0.18);
+  }
+  .grid-2-col .grid-item:last-child {
+    border-bottom: none;
+  }
+  .grid-3-col {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ─── Footer ─────────────────────────────────────────────── */
